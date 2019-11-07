@@ -1,0 +1,129 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.sjsu.esp.technocrats</groupId>
+  <artifactId>SmartLoan</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>SmartLoan</name>
+  <url>http://maven.apache.org</url>
+
+   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+  </properties>
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.8.RELEASE</version>
+</parent>
+
+<dependencyManagement>
+<dependencies>
+<dependency>
+    	<groupId>software.amazon.awssdk</groupId>
+    	<artifactId>bom</artifactId>
+    	<version>2.9.12</version>
+    	<type>pom</type>
+    	<scope>import</scope>
+    </dependency>
+</dependencies>
+</dependencyManagement>
+  
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+  
+    	<dependency>
+    	<groupId>org.springframework.boot</groupId>
+   		<artifactId>spring-boot-starter-web</artifactId>
+    	</dependency>
+    	<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-test</artifactId>
+    		<scope>test</scope>
+    	</dependency>
+    	<dependency>
+    		<groupId>com.amazonaws</groupId>
+    		<artifactId>aws-java-sdk</artifactId>
+    		<version>1.11.645</version>
+    	</dependency>
+    	<dependency>
+    		<groupId>com.amazonaws</groupId>
+    		<artifactId>aws-java-sdk-s3</artifactId>
+    		<version>1.11.645</version>
+    	</dependency>
+
+	<dependency>
+		<groupId>software.amazon.awssdk</groupId>
+		<artifactId>core</artifactId>
+		<version>2.9.13</version>
+		<type>pom</type>
+	</dependency>
+	<dependency>
+		<groupId>software.amazon.awssdk</groupId>
+		<artifactId>auth</artifactId>
+		<version>2.9.12</version>
+	</dependency>
+	<dependency>
+		<groupId>software.amazon.awssdk</groupId>
+		<artifactId>aws-core</artifactId>
+		<version>2.9.13</version>
+	</dependency>
+	<dependency>
+		<groupId>software.amazon.awssdk</groupId>
+		<artifactId>s3</artifactId>
+		<version>2.9.13</version>
+	</dependency>
+	
+	<dependency>
+    <groupId>commons-io</groupId>
+    <artifactId>commons-io</artifactId>
+    <version>2.6</version>
+</dependency>
+	
+  </dependencies>
+<build>
+<plugins>
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-dependency-plugin</artifactId>
+<executions>
+<execution>
+<id>copy-dependencies</id>
+<phase>prepare-package</phase>
+<goals>
+<goal>copy-dependencies</goal>
+</goals>
+<configuration>
+<outputDirectory>
+${project.build.directory}/libs
+</outputDirectory>
+</configuration>
+</execution>
+</executions>
+</plugin>
+
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-jar-plugin</artifactId>
+<configuration>
+<archive>
+<manifest>
+<addClasspath>true</addClasspath>
+<classpathPrefix>libs/</classpathPrefix>
+<mainClass>com.sjsu.esp.technocrats.application.SmartLoanApp</mainClass>
+</manifest>
+</archive>
+</configuration>
+</plugin>
+</plugins>
+</build>
+	
+</project>
